@@ -1,28 +1,28 @@
 #include "Stack.h"
 
+
 Stack::Stack(){
-	top_index = -1;
-	for (int i = 0; i < 10; ++i){
-		arr[i] = 0;
-	}
+	top = -1;
+	std::cout << "Stack Construction..." << '\n';
 }
+
+
 Stack::~Stack()
 {
-	std::cout << "Destructing..." << '\n';
+	std::cout << "Stack Destruction...at adress:" << this << '\n';
 }
 
 
-void Stack::push(const int& item){
-	top_index++;
-	arr[top_index] = item;
+void Stack::push(const char& item){
+	arr[++top] = item;
 }
 
-int& Stack::pop(){
-	return arr[top_index--];
+char& Stack::pop(){
+	return arr[top--];
 }
 
 bool Stack::IsEmpty() const{
-	if (top_index == -1){
+	if (top == -1){
 		return true;
 	}
 	else{
@@ -31,8 +31,5 @@ bool Stack::IsEmpty() const{
 }
 
 void Stack::print() const{
-	for (int i = 0; i < 10; ++i)
-	{
-		std::cout << "stack[" << i << "]:" << arr[i] << '\n';
-	}
+	arr.print();
 }

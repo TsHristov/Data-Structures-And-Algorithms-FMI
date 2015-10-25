@@ -1,20 +1,13 @@
 #include<iostream>
-#include "DynamicArray.h"
+#include "Stack.h"
 int main(){
-	DynamicArray<int> obj;
-	obj.insert(1);
-	obj.insert(2);
-	obj.insert(3);
-	obj.insert(4);
-	obj.insert(5);
-	obj.insert(6);
-	obj.insert(7);
+	Stack obj;
+	obj.push('a');
+	//std::cout << obj.IsEmpty() << '\n';
 	obj.print();
-
-	DynamicArray<int> other(obj);
-	other.print();
-	other.insert(9);
-	other.print();
-
+	obj.pop();
+	obj.print();
+	obj.push('b');
+	obj.print();
 	return 0;
 }

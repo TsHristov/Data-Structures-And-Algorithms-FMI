@@ -19,7 +19,7 @@ public:
 	void resize();
 	T& operator[](int);
 	void free();
-
+	size_t GetSize() const;
 public:
 	void print() const;
 };
@@ -30,14 +30,14 @@ DynamicArray<T>::DynamicArray()
 	size = 0;
 	capacity = 3;
 	phead = new T[capacity];
-	std::cout << "constructing..." << '\n';
+	std::cout << "DynamicArray construction..." << '\n';
 }
 
 template<class T>
 DynamicArray<T>::~DynamicArray()
 {
 	free();
-	std::cout << "destructing..." << this << '\n';
+	std::cout << "DynamicArray destruction...at adress:" << this << '\n';
 }
 
 template<class T>
@@ -116,4 +116,9 @@ void DynamicArray<T>::print() const{
 	for (int i = 0; i < capacity; ++i){
 		std::cout << "[" << i << "]:" << phead[i] << '\n';
 	}
+}
+
+template<class T>
+size_t DynamicArray<T>::GetSize() const{
+	return size;
 }
