@@ -3,8 +3,8 @@
 class DynamicArray
 {
 private:
-	size_t size; // Length
-	size_t capacity; //AllocatedSize
+	size_t size;
+	size_t capacity;
 	int* phead;
 
 public:

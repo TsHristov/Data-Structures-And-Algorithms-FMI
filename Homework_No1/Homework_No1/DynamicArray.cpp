@@ -57,6 +57,7 @@ int& DynamicArray::operator[](int index){
 void DynamicArray::insert(int element){
 	if (size == capacity)
 	{
+		std::cout << "enters the if clause..." << '\n';
 		this->resize();
 	}
 	phead[size++] = element;
@@ -65,6 +66,14 @@ void DynamicArray::insert(int element){
 
 
 void DynamicArray::resize(){
+	capacity *= 2;
+	int* pToResized = new int[capacity];
+	for (size_t i = 0; i < capacity; ++i){
+		pToResized[i] = phead[i];
+	}
+	delete[] phead;
+	phead = pToResized;
+	delete[] pToResized;
 }
 
 void DynamicArray::free(){
