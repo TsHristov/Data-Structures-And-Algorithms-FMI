@@ -104,7 +104,7 @@ void DynamicArray<T>::resize(){
 
 template<class T>
 void DynamicArray<T>::removeElement(){
-	size--;
+	--size;
 }
 
 template<class T>

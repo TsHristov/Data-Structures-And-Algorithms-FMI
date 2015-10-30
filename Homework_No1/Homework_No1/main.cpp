@@ -23,9 +23,7 @@ string operator*(const string& s, unsigned int n) {
 string operator*(unsigned int n, const string& s) { return s * n; }
 
 int main(){
-	string expr;
-	cout << "Enter expression: ";
-	getline(cin,expr);
+	string expr("3(AB)");
 
 	Stack decompressor;
 	string decompressed;
@@ -46,10 +44,13 @@ int main(){
 			decompressed = temp * val;
 		}
 	}
-	for (string::iterator it = decompressed.begin(); it != decompressed.end(); ++it){
+	std::cout << "decompressed: " << decompressed << endl;
+	//std::cout << "size: " << decompressor.GetArrSize() << endl;
+	//std::cout << "top: " << decompressor.GetTop() << endl;
+	for (std::string::reverse_iterator it = decompressed.rbegin(); it != decompressed.rend(); ++it){
 		decompressor.push(*it);
 	}
+	decompressor.push('0');
 	decompressor.print();
-
 	return 0;
 }
