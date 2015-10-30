@@ -12,11 +12,12 @@ public:
 	DynamicArray();
 	~DynamicArray();
 	DynamicArray(const DynamicArray&);
-	const DynamicArray& operator=(const DynamicArray&);
+	DynamicArray& operator=(const DynamicArray&);
 
 public:
 	void insert(T);
 	void resize();
+	void removeElement();
 	T& operator[](int);
 	void free();
 	size_t GetSize() const;
@@ -30,14 +31,14 @@ DynamicArray<T>::DynamicArray()
 	size = 0;
 	capacity = 3;
 	phead = new T[capacity];
-	std::cout << "DynamicArray construction..." << '\n';
+	//std::cout << "DynamicArray construction..." << '\n';
 }
 
 template<class T>
 DynamicArray<T>::~DynamicArray()
 {
 	free();
-	std::cout << "DynamicArray destruction...at adress:" << this << '\n';
+	//std::cout << "DynamicArray destruction...at adress:" << this << '\n';
 }
 
 template<class T>
@@ -48,11 +49,11 @@ DynamicArray<T>::DynamicArray(const DynamicArray& o){
 	}
 	size = o.size;
 	capacity = o.capacity;
-	std::cout << "Copy constructor..." << '\n';
+	//std::cout << "Copy constructor..." << '\n';
 }
 
 template<class T>
-const DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray& o){
+DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray& o){
 	if (this == &o){
 		return *this;
 	}
@@ -65,17 +66,17 @@ const DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray& o){
 		size = o.size;
 		capacity = o.capacity;
 	}
-	std::cout << "operator=" << '\n';
+	//std::cout << "operator=" << '\n';
 	return *this;
 }
 
 template<class T>
 T& DynamicArray<T>::operator[](int index){
-	/*if (index < 0 || index > capacity - 1){
-	std::cout << "Index out of bounds!" << '\n';
-	exit(1);
-	}*/
-	std::cout << "operator[]" << '\n';
+	if (index < 0 || index > capacity - 1){
+		std::cout << "Index out of bounds!" << '\n';
+		exit(1);
+	}
+	//std::cout << "operator[]" << '\n';
 	return phead[index];
 }
 
@@ -83,11 +84,11 @@ template<class T>
 void DynamicArray<T>::insert(T element){
 	if (size == capacity)
 	{
-		std::cout << "enters the if clause..." << '\n';
+		//std::cout << "enters the if clause..." << '\n';
 		this->resize();
 	}
 	phead[size++] = element;
-	std::cout << "insert.." << '\n';
+	//std::cout << "insert.." << '\n';
 }
 
 template<class T>
@@ -99,6 +100,11 @@ void DynamicArray<T>::resize(){
 	delete[] phead;
 	capacity *= 2;
 	phead = pToResized;
+}
+
+template<class T>
+void DynamicArray<T>::removeElement(){
+	size--;
 }
 
 template<class T>
