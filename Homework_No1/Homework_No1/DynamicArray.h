@@ -31,14 +31,12 @@ DynamicArray<T>::DynamicArray()
 	size = 0;
 	capacity = 3;
 	phead = new T[capacity];
-	//std::cout << "DynamicArray construction..." << '\n';
 }
 
 template<class T>
 DynamicArray<T>::~DynamicArray()
 {
 	free();
-	//std::cout << "DynamicArray destruction...at adress:" << this << '\n';
 }
 
 template<class T>
@@ -49,7 +47,6 @@ DynamicArray<T>::DynamicArray(const DynamicArray& o){
 	}
 	size = o.size;
 	capacity = o.capacity;
-	//std::cout << "Copy constructor..." << '\n';
 }
 
 template<class T>
@@ -66,7 +63,6 @@ DynamicArray<T>& DynamicArray<T>::operator=(const DynamicArray& o){
 		size = o.size;
 		capacity = o.capacity;
 	}
-	//std::cout << "operator=" << '\n';
 	return *this;
 }
 
@@ -76,7 +72,6 @@ T& DynamicArray<T>::operator[](int index){
 		std::cout << "Index out of bounds!" << '\n';
 		exit(1);
 	}
-	//std::cout << "operator[]" << '\n';
 	return phead[index];
 }
 
@@ -84,11 +79,9 @@ template<class T>
 void DynamicArray<T>::insert(T element){
 	if (size == capacity)
 	{
-		//std::cout << "enters the if clause..." << '\n';
 		this->resize();
 	}
 	phead[size++] = element;
-	//std::cout << "insert.." << '\n';
 }
 
 template<class T>
@@ -120,7 +113,6 @@ void DynamicArray<T>::free(){
 template<class T>
 void DynamicArray<T>::print() const{
 	for (int i = 0; i < capacity; ++i){
-		//std::cout << "[" << i << "]:" << phead[i] << '\n';
 		std::cout << phead[i];
 	}
 	std::cout << '\n';

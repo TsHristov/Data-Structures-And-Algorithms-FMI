@@ -8,14 +8,6 @@ bool IsNumber(char c){
 	return(c >= '0' && c <= '9');
 }
 
-bool IsAlpha(char c){
-	return(c >= 'A' && c <= 'Z');
-}
-
-int ToNumber(char c){
-	return(c - '0');
-}
-
 string operator*(const string& s, unsigned int n) {
 	stringstream out;
 	while (n--)
@@ -23,9 +15,10 @@ string operator*(const string& s, unsigned int n) {
 	return out.str();
 }
 
-string operator*(unsigned int n, const string& s) { return s * n; }
+string operator*(unsigned int n, const string& s) { 
+	return s * n; 
+}
 
-//"12ZQ" -> ZQ ,leaves letters only
 string removeNumbers(string arg){
 	string clear;
 	for (string::iterator it = arg.begin(); it != arg.end(); ++it){
@@ -103,7 +96,9 @@ Stack decompress(string expression){
 
 int main(){
 	
-	string expression("2(2(A)3(B))");
+	string expression;
+	cout << "expression: " << '\n';
+	getline(cin, expression);
 	Stack result = decompress(expression);
 	std::cout << "result: ";
 	result.print();

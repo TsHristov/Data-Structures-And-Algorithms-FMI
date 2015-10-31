@@ -3,13 +3,11 @@
 
 Stack::Stack(){
 	top_index = -1;
-	//std::cout << "Stack Construction..." << '\n';
 }
 
 
-Stack::~Stack()
-{
-	//std::cout << "Stack Destruction...at adress:" << this << '\n';
+Stack::~Stack(){
+
 }
 
 void Stack::push(const char& item){
