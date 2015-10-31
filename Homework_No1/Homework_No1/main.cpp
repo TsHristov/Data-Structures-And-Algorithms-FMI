@@ -11,6 +11,7 @@ bool IsNumber(char c){
 bool IsAlpha(char c){
 	return(c >= 'A' && c <= 'Z');
 }
+
 int ToNumber(char c){
 	return(c - '0');
 }
@@ -24,6 +25,36 @@ string operator*(const string& s, unsigned int n) {
 
 string operator*(unsigned int n, const string& s) { return s * n; }
 
+//"12ZQ" -> ZQ ,leaves letters only
+string removeNumbers(string arg){
+	string clear;
+	for (string::iterator it = arg.begin(); it != arg.end(); ++it){
+		if (!IsNumber(*it)){
+			clear.push_back(*it);
+		}
+	}
+	return clear;
+}
+
+string expand(Stack& reverse){
+	string x;
+	char t;
+	do
+	{
+		t = reverse.top();
+		reverse.pop();
+		if (t != '('){
+			x.push_back(t);
+		}
+	} while (reverse.GetArrSize() > 0);
+
+	unsigned int mult = atoi(x.c_str());
+
+	x = removeNumbers(x);
+
+	string decompressed = x * mult;
+	return decompressed;
+}
 
 Stack decompress(string expression){
 	Stack original;
@@ -59,29 +90,9 @@ Stack decompress(string expression){
 				}
 			}
 
+			string expanded = expand(reverse);
 
-			string x;
-			do
-			{
-				t = reverse.top();
-				reverse.pop();
-				if (t != '('){
-					x.push_back(t);
-				}
-			} while (reverse.GetArrSize() > 0);
-			unsigned int mult = atoi(x.c_str());
-
-
-
-			string clear;
-			for (string::iterator it = x.begin(); it != x.end(); ++it){
-				if (!IsNumber(*it)){
-					clear.push_back(*it);
-				}
-			}
-			decompressed = clear * mult;
-
-			for (string::iterator it = decompressed.begin(); it != decompressed.end(); ++it){
+			for (string::iterator it = expanded.begin(); it != expanded.end(); ++it){
 				original.push(*it);
 			}
 			index = original.GetTop();
