@@ -2,13 +2,15 @@
 #include <sstream>
 #include<string>
 #include "Stack.h"
-#include <time.h>
 using namespace std;
-//function to decompress and evaluate the expression
+
 bool IsNumber(char c){
 	return(c >= '0' && c <= '9');
 }
 
+bool IsAlpha(char c){
+	return(c >= 'A' && c <= 'Z');
+}
 int ToNumber(char c){
 	return(c - '0');
 }
@@ -22,34 +24,78 @@ string operator*(const string& s, unsigned int n) {
 
 string operator*(unsigned int n, const string& s) { return s * n; }
 
-int main(){
-	string expr("2(2(A)3(B))");
 
-	Stack decompressor;
+Stack decompress(string expression){
+	Stack original;
 	string decompressed;
-	for (string::iterator it = expr.begin(); it != expr.end(); ++it){
+
+	int index = 0;
+	for (string::iterator it = expression.begin(); it != expression.end(); ++it){
 		if (*it != ')'){
-			decompressor.push(*it);
-		}
-		else{
-			string temp;
-			char t;
-			do{
-				t = decompressor.pop();
-				if (t != '(' && t != ')' && !IsNumber(t)){
-					temp.push_back(t);
-				}
-			} while (!IsNumber(t));
-			int val = ToNumber(t);
-			decompressed = temp * val;
-			std::cout << "before:" << endl;
-			decompressor.print();
-			for (std::string::reverse_iterator it = decompressed.rbegin(); it != decompressed.rend(); ++it){
-				decompressor.push(*it);
+			if (IsNumber(*it)){
+				original.push(*it);
+				index = original.GetTop();
 			}
-			std::cout << "afrer: " << endl;
-			decompressor.print();
+			else{
+				original.push(*it);
+			}
+		}
+		if (*it == ')'){
+			Stack reverse;
+			char t;
+
+			if (original.GetTop() == index){
+				while (original.GetTop() >= 0){
+					t = original.top();
+					reverse.push(t);
+					original.pop();
+				}
+			}
+			else{
+				while (original.GetTop() >= index){
+					t = original.top();
+					reverse.push(t);
+					original.pop();
+				}
+			}
+
+
+			string x;
+			do
+			{
+				t = reverse.top();
+				reverse.pop();
+				if (t != '('){
+					x.push_back(t);
+				}
+			} while (reverse.GetArrSize() > 0);
+			unsigned int mult = atoi(x.c_str());
+
+
+
+			string clear;
+			for (string::iterator it = x.begin(); it != x.end(); ++it){
+				if (!IsNumber(*it)){
+					clear.push_back(*it);
+				}
+			}
+			decompressed = clear * mult;
+
+			for (string::iterator it = decompressed.begin(); it != decompressed.end(); ++it){
+				original.push(*it);
+			}
+			index = original.GetTop();
 		}
 	}
+	return original;
+}
+
+int main(){
+	
+	string expression("2(2(A)3(B))");
+	Stack result = decompress(expression);
+	std::cout << "result: ";
+	result.print();
+
 	return 0;
 }

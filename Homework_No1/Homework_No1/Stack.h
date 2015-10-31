@@ -1,11 +1,11 @@
 #include <iostream>
 #include "DynamicArray.h"
 #pragma once
-//pop & top better be separate
+
 class Stack
 {
 private:
-	int top;
+	int top_index;
 	DynamicArray<char> arr;
 
 public:
@@ -14,7 +14,8 @@ public:
 
 public:
 	void push(const char&);
-	char& pop(); //return and removes the top element
+	void pop();
+	char  top();
 	int GetTop() const;
 	bool IsEmpty() const;
 	size_t GetArrSize() const;

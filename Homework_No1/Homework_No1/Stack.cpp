@@ -2,7 +2,7 @@
 
 
 Stack::Stack(){
-	top = -1;
+	top_index = -1;
 	//std::cout << "Stack Construction..." << '\n';
 }
 
@@ -14,20 +14,24 @@ Stack::~Stack()
 
 void Stack::push(const char& item){
 	arr.insert(item);
-	top++;
+	top_index++;
 }
 
-char& Stack::pop(){
+void Stack::pop(){
 	arr.removeElement();
-	return arr[top--];
+	--top_index;
+}
+
+char Stack::top(){
+	return arr[top_index];
 }
 
 int Stack::GetTop() const{
-	return top;
+	return top_index;
 }
 
 bool Stack::IsEmpty() const{
-	if (top == -1){
+	if (top_index == -1){
 		return true;
 	}
 	else{

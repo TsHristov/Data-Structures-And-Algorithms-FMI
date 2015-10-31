@@ -120,8 +120,10 @@ void DynamicArray<T>::free(){
 template<class T>
 void DynamicArray<T>::print() const{
 	for (int i = 0; i < capacity; ++i){
-		std::cout << "[" << i << "]:" << phead[i] << '\n';
+		//std::cout << "[" << i << "]:" << phead[i] << '\n';
+		std::cout << phead[i];
 	}
+	std::cout << '\n';
 }
 
 template<class T>
