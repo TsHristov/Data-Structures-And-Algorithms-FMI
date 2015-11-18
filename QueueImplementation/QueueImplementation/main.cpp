@@ -1,12 +1,12 @@
 #include<iostream>
-#include "QueueLinkedList.h"
-
+//#include "QueueLinkedList.h"
+#include "QueueDynamicArray.h"
 int main(){
-	QueueLinkedList<char> obj;
+	QueueDynamicArray<int> obj;
 	
 	std::cout << "Enqueued: \n";
 	for (size_t i = 0; i < 20; ++i){
-		obj.Enqueue('a' + i);
+		obj.Enqueue(i);
 	}
 	std::cout << "\nDequeued: \n";
 

@@ -7,7 +7,11 @@ private:
 		T data;
 		Node *next;
 		Node(const T& v, Node *n) :next(n), data(v){}
-		~Node(){delete next;}
+		~Node(){
+			if (!next){
+				delete next;
+			}
+		}
 	};
 
 private:
@@ -15,17 +19,14 @@ private:
 	size_t size;
 
 public:
-	QueueLinkedList():head(nullptr), tail(nullptr),size(0){}
-	~QueueLinkedList(){delete head;}
-	
+	QueueLinkedList() :head(nullptr), tail(nullptr), size(0){}
+	~QueueLinkedList(){ delete head; }
+
 public:
 	void Enqueue(const T&);
 	void Dequeue();
 	T Peek() const;
-
-public:
-	bool IsEmpty(){ return size == 0; }
-	size_t GetSize() const{ return this->size; } 
+	size_t GetSize() const{ return this->size; }
 };
 
 
@@ -51,7 +52,6 @@ template<class T>
 void QueueLinkedList<T>::Dequeue(){
 	Node *removed = head;
 	head = removed->next;
-	removed->next = nullptr;
 	delete removed;
 	--size;
 }
