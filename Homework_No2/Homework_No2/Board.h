@@ -18,12 +18,17 @@ public:
 		board = new Cell*[rowsCount];
 	}
 	~Board(){
+		free();
+	}
+	Board(const Board&);
+	Board& operator=(const Board&);
+	void copyFrom(const Board&);
+	void free(){
 		for (size_t i = 0; i < columnsCount; ++i){
 			delete board[i];
 		}
 		delete[] board;
 	}
-
 public:
 	Cell getAt(size_t, size_t) const;
 	void showCell(const Cell&) const;
