@@ -1,7 +1,13 @@
 #include <iostream>
 #include "Queue.h"
 #include "Cell.h"
-#include "Field.h"
+#include "Board.h"
+
+
+#define CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 
 bool canPass(char m[][3], size_t row, size_t col, const Cell& cell){
 	if (cell.row < 0 || cell.row >= row || cell.col < 0 || cell.col >= col){
@@ -12,21 +18,33 @@ bool canPass(char m[][3], size_t row, size_t col, const Cell& cell){
 
 //TODO:
 /*
+	- create Board class - check
 	- create Cell class
-	- create Field class
 	- perform BFS to find the shortest path
 */
 
 int main(){
 	
-	//create field 3x3
-	Field field(3, 3);
+	//create board
+	{
+		int rows, cols;
+		std::cout << "rows = ";
+		std::cin >> rows;
+		std::cout << "cols = ";
+		std::cin >> cols;
 
+		Board field(rows, cols);
+		field.create();
+		field.display();
+
+
+	}
+	_CrtDumpMemoryLeaks();
 	//set the starting point at position (1, 1)
-	Cell start(1, 1);
+	//Cell start(1, 1);
 
 	//start the BFS algorithm to find the shortest path
-	Queue<Cell> q;
+	//Queue<Cell> q;
 
 	return 0;
 }
