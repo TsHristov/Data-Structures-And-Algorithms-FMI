@@ -1,11 +1,13 @@
 #include <iostream>
+#include "Cell.h"
 #pragma once
+
 class Board{
 
 private:
 	size_t rowsCount, columnsCount;
 	size_t size;
-	char** board;
+	Cell** board;
 
 public:
 	Board() :board(nullptr), rowsCount(0), columnsCount(0){}
@@ -13,7 +15,7 @@ public:
 		rowsCount = n;
 		columnsCount = m;
 		size = rowsCount*columnsCount;
-		board = new char*[rowsCount];
+		board = new Cell*[rowsCount];
 	}
 	~Board(){
 		for (size_t i = 0; i < columnsCount; ++i){
@@ -23,6 +25,12 @@ public:
 	}
 
 public:
+	Cell getAt(size_t, size_t) const;
+	void showCell(const Cell&) const;
+
+public:
 	void create();
 	void display() const;
 };
+
+

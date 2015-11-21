@@ -19,13 +19,11 @@ bool canPass(char m[][3], size_t row, size_t col, const Cell& cell){
 //TODO:
 /*
 	- create Board class - check
-	- create Cell class
+	- create Cell class - check
 	- perform BFS to find the shortest path
 */
 
 int main(){
-	
-	//create board
 	{
 		int rows, cols;
 		std::cout << "rows = ";
@@ -33,18 +31,14 @@ int main(){
 		std::cout << "cols = ";
 		std::cin >> cols;
 
-		Board field(rows, cols);
-		field.create();
-		field.display();
+		Board board(rows, cols);
+		board.create();
 
+		Cell start = board.getAt(0, 0);
+		board.showCell(start);
 
 	}
 	_CrtDumpMemoryLeaks();
-	//set the starting point at position (1, 1)
-	//Cell start(1, 1);
-
-	//start the BFS algorithm to find the shortest path
-	//Queue<Cell> q;
 
 	return 0;
 }
