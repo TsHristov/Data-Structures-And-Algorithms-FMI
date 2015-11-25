@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Queue.h"
+/*#include "Queue.h"
 #include "Cell.h"
 #include "Board.h"
-#include "PathFinder.h"
-
+#include "PathFinder.h"*/
+#include "LinkedList.h"
 #define CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
@@ -27,7 +27,10 @@
 
 int main(){
 	{
-		int rows, cols;
+		LinkedList<int> list;
+		list.add(1);
+		list.add(2);
+		/*int rows, cols;
 		std::cout << "rows = ";
 		std::cin >> rows;
 		std::cout << "cols = ";
@@ -40,7 +43,7 @@ int main(){
 
 		PathFinder path(board, start);
 
-		path.shortestPath();
+		path.shortestPath();*/
 
 		/*Cell start = board.getAt(0, 0);
 		board.showCell(start);*/

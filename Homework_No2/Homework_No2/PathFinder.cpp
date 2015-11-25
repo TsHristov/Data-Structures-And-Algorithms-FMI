@@ -2,7 +2,7 @@
 
 void PathFinder::BFS(){
 	//LinkedList<Cell> result;
-	int moveRows[] = { 0, -1, 0, 1 };
+	/*int moveRows[] = { 0, -1, 0, 1 };
 	int moveColumns[] = { -1, 0, 1, 0 };
 	Queue<Cell> q;
 	Cell currentPosition;
@@ -21,7 +21,7 @@ void PathFinder::BFS(){
 			}
 
 		}
-	}
+	}*/
 }
 
 void PathFinder::DFS(){
