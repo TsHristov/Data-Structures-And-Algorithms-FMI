@@ -3,6 +3,7 @@
 #include "Cell.h"
 #include "Board.h"
 #include "PathFinder.h"*/
+#include "Iterator.h"
 #include "LinkedList.h"
 #define CRTDBG_MAP_ALLOC
 #include <stdlib.h>
@@ -19,9 +20,6 @@
 
 //TODO:
 /*
-	- create Board class - check
-	- create Cell class - check
-	- write appropriate comments for Cell and Board classes -
 	- perform BFS to find the shortest path - 
 */
 
@@ -30,6 +28,14 @@ int main(){
 		LinkedList<int> list;
 		list.add(1);
 		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(5);
+		list.add(6);
+		for (Iterator<int> it = list.GetIterator(); !it.EndReached(); it.MoveNext())
+		{
+			std::cout << it.GetCurrent() << '\n';
+		}
 		/*int rows, cols;
 		std::cout << "rows = ";
 		std::cin >> rows;

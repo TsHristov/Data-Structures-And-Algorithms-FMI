@@ -1,21 +1,10 @@
 #pragma once
-//TODO - finish LinkedList this evening
+#include "Node.h"
 template<class T>
 class LinkedList
 {
 private:
-	struct Node{
-		T data;
-		Node *pNext;
-
-	public:
-		Node(const T& d, Node *next = NULL) :data(d), pNext(next){}
-		~Node(){
-			delete pNext;
-		}
-	};
-
-	Node *pHead, *pTail;
+	Node<T> *pHead, *pTail;
 	size_t size;
 
 public:
@@ -29,6 +18,7 @@ public:
 		return size == 0;
 	}
 	void add(const T&);
+	Iterator<T> GetIterator() const;
 };
 
 template<class T>
@@ -36,16 +26,22 @@ void LinkedList<T>::add(const T& val)
 {
 	if (this->IsEmpty())
 	{
-		pHead = new Node(val, nullptr);
+		pHead = new Node<T>(val,pHead);
 		pTail = pHead;
 		++size;
 	}
 	else
 	{
-		Node *newNode = new Node(val, nullptr);
+		Node<T> *newNode = new Node<T>(val, nullptr);
 		pTail->pNext = newNode;
 		pTail = newNode;
 		++size;
 	}
 
+}
+
+template <class T>
+Iterator<T> LinkedList<T>::GetIterator() const
+{
+	return Iterator<T>(this->pHead);
 }
