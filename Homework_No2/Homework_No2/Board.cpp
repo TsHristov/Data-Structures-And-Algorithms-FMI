@@ -32,9 +32,12 @@ Board& Board::operator=(const Board& other){
 
 
 Cell Board::getAt(size_t row,size_t col) const{
-	Cell returned(row, col);
-	returned.setContent(board[row][col].getContent());
-	return returned;
+	if (row < rowsCount && col < columnsCount)
+	{
+		Cell returned(row, col);
+		returned.setContent(board[row][col].getContent());
+		return returned;
+	}
 }
 
 
@@ -42,6 +45,12 @@ void Board::showCell(const Cell& cell) const{
 	std::cout << board[cell.row][cell.col].getContent() << ' ';
 }
 
+bool Board::canPass(const Cell& cell) const{
+	if (cell.GetRow() < 0 || cell.GetRow() >= rowsCount || cell.GetCol() < 0 || cell.GetCol() >= columnsCount){
+		return false;
+	}
+	return board[cell.GetRow()][cell.GetCol()].getContent() == '.';
+}
 
 void Board::create(){
 	std::cout << "Enter the board: \n";

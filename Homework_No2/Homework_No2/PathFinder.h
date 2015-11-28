@@ -1,21 +1,22 @@
 #pragma once
 #include "Queue.h"
 #include "Board.h"
-class PathFinder{
+#include "Iterator.h"
+#include "LinkedList.h"
+
+class PathFinder
+{
 private:
-	Board pBoard;
+	Board board;
 	Cell start;
 
 public:
 	PathFinder();
-	PathFinder(const Board& board,const Cell& cell){
-		pBoard = board;
-		start = cell;
+	PathFinder(const Board& board, const Cell& cell){
+		this->board = board;
+		this->start = cell;
 	}
-	~PathFinder();
 
 public:
 	void BFS();
-	void DFS();
-	void allPaths();
 };

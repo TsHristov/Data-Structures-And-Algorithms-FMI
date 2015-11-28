@@ -29,9 +29,23 @@ public:
 		}
 		delete[] board;
 	}
+
 public:
 	Cell getAt(size_t, size_t) const;
+	Cell& getCell(const Cell& cell) const{
+		return board[cell.GetRow()][cell.GetCol()];
+	}
 	void showCell(const Cell&) const;
+
+public:
+	bool canPass(const Cell& cell) const;
+	bool wasVisited(const Cell& cell) const{
+		return getCell(cell).wasVisited;
+	}
+	void markAsVisted(Cell& cell){
+		Cell change = this->getCell(cell);
+		getCell(cell).wasVisited = true;
+	}
 
 public:
 	void create();
