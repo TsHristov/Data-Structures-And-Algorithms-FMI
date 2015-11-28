@@ -7,7 +7,7 @@ private:
 	size_t row, col;
 
 public:
-	Cell() :symbol('\0'), wasVisited(false), row(-1), col(-1){}
+	Cell() :symbol('\0'), wasVisited(false), row(0), col(0){}
 	Cell(size_t r, size_t c) : row(r), col(c), wasVisited(false){}
 
 public:

@@ -14,10 +14,17 @@ int main(){
 		std::cout << "cols = ";
 		std::cin >> cols;
 
+		std::cout << "Set starting point:" << '\n';
+		int x, y;
+		std::cout << "row = ";
+		std::cin >> x;
+		std::cout << "col = ";
+		std::cin >> y;
+
 		Board board(rows, cols);
 		board.create();
 
-		Cell start = board.getAt(1, 1);
+		Cell start = board.getAt(x, y);
 
 		PathFinder path(board, start);
 

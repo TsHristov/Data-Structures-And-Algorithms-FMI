@@ -6,7 +6,6 @@ void PathFinder::BFS(){
 	
 	Queue<Cell> q;
 	LinkedList<Cell> result;
-	//Cell currentPosition;
 	
 	q.Enqueue(start);
 	board.markAsVisted(start);
