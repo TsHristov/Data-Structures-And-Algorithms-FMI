@@ -29,7 +29,7 @@ int main(){
 
 		std::cout << "Shortest path: " << '\n';
 		path.BFS();
-
+		std::cout << '\n';
 		std::cout << "All paths: " << '\n';
 		path.DFS();
 

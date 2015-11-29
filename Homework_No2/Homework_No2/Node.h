@@ -5,7 +5,7 @@ struct Node{
 	Node *pNext;
 
 public:
-	Node(const T& d, Node *next = NULL) :data(d), pNext(next){}
+	Node(const T& d, Node *next = nullptr) :data(d), pNext(next){}
 	~Node(){
 		delete pNext;
 	}

@@ -47,14 +47,14 @@ void PathFinder::DFS(){
 	stack.push(start);
 	output.add(start);
 	board.markAsVisted(start);
-
+	std::cout << "All paths to position: " << start.GetRow() << "," << start.GetCol() << '\n';
+	PathFinder allpaths(board, start);
+	allpaths.DFS(start, start);
 	while (!stack.IsEmpty())
 	{
 		Cell currentPosition = stack.top();
 
-		//must print all the paths  from the start to the currentPosition
-		//PathFinder allpaths(board, currentPosition);
-		//allpaths.DFS(start, currentPosition);
+		
 	
 		int neighboursCount = 0;
 		for (size_t i = 0; i < 4; ++i)
@@ -65,6 +65,10 @@ void PathFinder::DFS(){
 				stack.push(nextPosition);
 				output.add(nextPosition);
 				board.markAsVisted(nextPosition);
+				std::cout << '\n';
+				std::cout << "All paths to position: " << nextPosition.GetRow() << "," << nextPosition.GetCol() << '\n';
+				PathFinder allpaths(this->board, nextPosition);
+				allpaths.DFS(start, nextPosition);
 				++neighboursCount;
 				break;
 			}
@@ -75,10 +79,10 @@ void PathFinder::DFS(){
 		}
 	}
 
-	for (Iterator<Cell> it = output.GetIterator(); !it.EndReached(); it.MoveNext())
+	/*for (Iterator<Cell> it = output.GetIterator(); !it.EndReached(); it.MoveNext())
 	{
 		it.GetCurrent().showCell();
-	}
+	}*/
 }
 
 
@@ -92,42 +96,57 @@ void PathFinder::DFS(Cell& start, Cell& end)
 {
 	//For each element in the labyrinth perform this
 	//Copy of the original board
-	std::cout << "Enters" << '\n';
-	Board copyBoard = board;
+	Board board = this->board;
 	int moveRows[] = { 0, -1, 0, 1 };
 	int moveColumns[] = { -1, 0, 1, 0 };
 
 	Stack<Cell>  stack;
 	LinkedList<Cell> output;
+	LinkedList<LinkedList<Cell>> allpaths;
 
 	stack.push(start);
-	copyBoard.markAsVisted(start);
+	output.add(start);
+	//copyBoard.markAsVisted(start);
 	Cell currentPosition;
+
 	while (currentPosition != end || !stack.IsEmpty())
 	{
 		currentPosition = stack.top();
-		output.add(currentPosition);
 
 		if (currentPosition == end)
 		{
+			allpaths.add(output);
+			//output.removeAll();
+			//take the already marked matrix and perform DFS on the unmarked cells PathFinder all(copyBoard, start); all.DFS(start, end)
 			break;
 		}
-		stack.pop();
+		int neighboursCount = 0;
 		for (size_t i = 0; i < 4; ++i)
 		{
 			Cell nextPosition = board.getAt(currentPosition.GetRow() + moveRows[i], currentPosition.GetCol() + moveColumns[i]);
 			if (board.canPass(nextPosition) && !board.wasVisited(nextPosition))
 			{
 				stack.push(nextPosition);
+				output.add(nextPosition);
 				board.markAsVisted(nextPosition);
+				++neighboursCount;
+				break;
 			}
 
+		}
+		if (!neighboursCount)
+		{
+			stack.pop();
 		}
 
 	}
 
-	for (Iterator<Cell> it = output.GetIterator(); !it.EndReached(); it.MoveNext())
+	// Iterates over the list of paths for the cell
+	for (Iterator<LinkedList<Cell>> pathIterator = allpaths.GetIterator(); !pathIterator.EndReached(); pathIterator.MoveNext())
 	{
-		it.GetCurrent().showCell();
+		for (Iterator<Cell> cellIterator = pathIterator.GetCurrent().GetIterator(); !cellIterator.EndReached(); cellIterator.MoveNext())
+		{
+			cellIterator.GetCurrent().showCell();
+		}
 	}
 }
