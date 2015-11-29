@@ -57,6 +57,7 @@ void Queue<T>::Dequeue(){
 	head = removed->next;
 	delete removed;
 	--size;
+	//added these because of the empty queue status 
 	if (size == 0){
 		head = nullptr;
 		tail = nullptr;

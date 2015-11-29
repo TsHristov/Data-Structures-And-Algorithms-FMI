@@ -3,6 +3,7 @@
 #include "Board.h"
 #include "Iterator.h"
 #include "LinkedList.h"
+#include "Stack.h"
 
 class PathFinder
 {
@@ -11,7 +12,6 @@ private:
 	Cell start;
 
 public:
-	PathFinder();
 	PathFinder(const Board& board, const Cell& cell){
 		this->board = board;
 		this->start = cell;
@@ -19,4 +19,6 @@ public:
 
 public:
 	void BFS();
+	void DFS();
+	void DFS(Cell& start, Cell& end);
 };

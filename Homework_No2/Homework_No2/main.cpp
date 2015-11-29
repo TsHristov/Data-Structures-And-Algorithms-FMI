@@ -5,7 +5,6 @@
 #define CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-
 int main(){
 	{
 		int rows, cols;
@@ -17,7 +16,7 @@ int main(){
 		std::cout << "Set starting point:" << '\n';
 		int x, y;
 		std::cout << "row = ";
-		std::cin >> x;
+		std::cin >> x; 
 		std::cout << "col = ";
 		std::cin >> y;
 
@@ -28,7 +27,11 @@ int main(){
 
 		PathFinder path(board, start);
 
+		std::cout << "Shortest path: " << '\n';
 		path.BFS();
+
+		std::cout << "All paths: " << '\n';
+		path.DFS();
 
 	}
 	_CrtDumpMemoryLeaks();
