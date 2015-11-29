@@ -20,5 +20,5 @@ public:
 public:
 	void BFS();
 	void DFS();
-	void DFS(Cell& start, Cell& end);
+	void allPaths(Cell& start, Cell& end);
 };
