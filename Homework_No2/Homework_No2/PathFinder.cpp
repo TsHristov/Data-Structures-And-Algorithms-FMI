@@ -26,7 +26,7 @@ void PathFinder::BFS(){
 		}
 	}
 
-	for (Iterator<Cell> it = result.GetIterator(); !it.EndReached(); it.MoveNext())
+	for (Iterator<Cell> it = result.GetIterator(); !it.End(); it.MoveNext())
 	{
 		it.GetCurrent().showCell();
 	}
@@ -51,9 +51,11 @@ void PathFinder::DFS(){
 	output.add(start);
 	board.markAsVisted(start);
 
-	std::cout << "All paths to position: " << start.GetRow() << "," << start.GetCol() << '\n';
+	// Corner case: find all paths to start
+	/*std::cout << "All paths to position: " << start.GetRow() << "," << start.GetCol() << '\n';
 	PathFinder allpaths(board, start);
-	allpaths.allPaths(start, start);
+	allpaths.allPaths(start, start);*/
+	//
 
 	while (!stack.IsEmpty())
 	{
@@ -67,9 +69,13 @@ void PathFinder::DFS(){
 				stack.push(nextPosition);
 				output.add(nextPosition);
 				board.markAsVisted(nextPosition);
-				std::cout << "\nAll paths to position: " << nextPosition.GetRow() << "," << nextPosition.GetCol() << '\n';
+
+				// finds all paths to nextPosition
+				/*std::cout << "\nAll paths to position: " << nextPosition.GetRow() << "," << nextPosition.GetCol() << '\n';
 				PathFinder allpaths(this->board, nextPosition);
-				allpaths.allPaths(start, nextPosition);
+				allpaths.allPaths(start, nextPosition);*/
+				//
+
 				++neighboursCount;
 				break;
 			}
@@ -84,10 +90,10 @@ void PathFinder::DFS(){
 	* Shows the result of the basic DFS performed.
 	* All paths for all cells not included.
 	*/
-	/*for (Iterator<Cell> it = output.GetIterator(); !it.EndReached(); it.MoveNext())
+	for (Iterator<Cell> it = output.GetIterator(); !it.End(); it.MoveNext())
 	{
 		it.GetCurrent().showCell();
-	}*/
+	}
 }
 
 /** 
@@ -160,11 +166,14 @@ void PathFinder::allPaths(Cell& start, Cell& end)
 	/**
 	* Iterates over the resulting list of available paths for the Cell
 	*/
-	for (Iterator<LinkedList<Cell>> pathIterator = allpaths.GetIterator(); !pathIterator.EndReached(); pathIterator.MoveNext())
+	for (Iterator<LinkedList<Cell>> pathIterator = allpaths.GetIterator(); !pathIterator.End(); pathIterator.MoveNext())
 	{
-		for (Iterator<Cell> cellIterator = pathIterator.GetCurrent().GetIterator(); !cellIterator.EndReached(); cellIterator.MoveNext())
+		for (Iterator<Cell> cellIterator = pathIterator.GetCurrent().GetIterator(); !cellIterator.End(); cellIterator.MoveNext())
 		{
 			cellIterator.GetCurrent().showCell();
 		}
 	}
+	/**
+	* Problem with the destructor.
+	*/
 }

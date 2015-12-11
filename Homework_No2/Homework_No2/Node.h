@@ -5,11 +5,11 @@ struct Node{
 	Node *pNext;
 
 public:
-	Node(const T& d, Node *next = nullptr) :data(d), pNext(next){}
+	Node(const T& d, Node *next) :pNext(next), data(d){}
 	~Node(){
-		delete pNext;
-	}
-	void showNode() const{
-		std::cout << data << '\n';
+		if (pNext)
+		{
+			delete pNext;
+		}
 	}
 };

@@ -28,11 +28,7 @@ public:
 			this->pCurrent = this->pCurrent->pNext;
 		}
 	}
-	void Rewind()
-	{
-		this->pCurrent = this->pStart;
-	}
-	bool EndReached() const
+	bool End() const
 	{
 		return this->pCurrent == NULL;
 	}

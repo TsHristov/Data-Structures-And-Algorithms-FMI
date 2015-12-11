@@ -1,7 +1,10 @@
 #pragma once
 class Cell
 {
-	//Cell has setters and getters so Board doesn`t need to be friend
+	/**
+	* TODO: Cell has setters and getters so Board doesn`t need to be a friend.
+	*/
+
 	friend class Board;
 private:
 	char symbol;

@@ -1,7 +1,9 @@
 #pragma once
 template<class T>
 class Queue{
-
+	/**
+	* TODO: Use Node.h instead of the this inline one.
+	*/
 private:
 	struct Node{
 		T data;
@@ -47,7 +49,6 @@ void Queue<T>::Enqueue(const T& value){
 		head = newElem;
 	}
 	++size;
-	//std::cout << newElem->data;
 }
 
 
@@ -57,7 +58,6 @@ void Queue<T>::Dequeue(){
 	head = removed->next;
 	delete removed;
 	--size;
-	//added these because of the empty queue status 
 	if (size == 0){
 		head = nullptr;
 		tail = nullptr;

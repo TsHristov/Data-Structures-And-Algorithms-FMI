@@ -10,7 +10,10 @@ private:
 public:
 	LinkedList() :pHead(nullptr), pTail(nullptr), size(0){}
 	~LinkedList(){
-		delete pHead;
+		if (pHead)
+		{
+			delete pHead;
+		}
 	}
 
 public:
