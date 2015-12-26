@@ -155,7 +155,7 @@ int main()
 		{
 			std::cout << "[" << i << "]=";
 			std::cin >> names[i];
-		}
+		} 
 		radixsort(names, N);
 		print(names, N);
 		std::cout << endl;
