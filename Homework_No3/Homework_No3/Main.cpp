@@ -108,15 +108,74 @@ void radixsort(string names[], int N)
 		countSort(names, N, step);
 }
 
+/*string* ENTER(string arg[],int min,int max)
+{
+	int size = (max - min) + 1;
+	string result[size];
+	for (int i = min; i <= max; ++i)
+	{
+		result[i] = arg[i];
+	}
+	delete[] result;
+	return arg;
+}*/
+
+void QUERY(string names[])
+{
+	std::cout << "ENTER";
+	int min, max;
+	std::cin >> min >> max;
+	string query;
+	std::cout << "QUERY";
+	std::cin >> query;
+	int count = 0;
+	for (int i = min; i <= max; ++i)
+	{
+		if (names[i].find(query) != string::npos)
+		{
+			++count;
+			/*cout << 1 << '\n';
+			cout << names[i] << " " << query << endl;*/
+		}
+	}
+	std::cout << count << endl;
+}
 int main()
 {
 	{
-		int N;
+		int T,N,Q;
+		cout << "T=";
+		cin >> T;
 		cout << "N=";
 		cin >> N;
-		string names[] = { "eli", "mama", "pesho", "maq" }; // { "ivan", "mitko", "joro", "peshe", "tobi" };
+		cout << "Q=";
+		cin >> Q;
+		string* names = new string[N];
+		for (int i = 0; i < N; ++i)
+		{
+			std::cout << "[" << i << "]=";
+			std::cin >> names[i];
+		}
 		radixsort(names, N);
 		print(names, N);
+		std::cout << endl;
+		QUERY(names);
+		/*string* m = ENTER(names, 0, 3);
+		std::cout << endl;
+		print(m, 4);*/
+		/*string names[] = { "ivan", "mitko", "joro", "peshe", "tobi" };
+		radixsort(names, N);
+		print(names, N);
+		cout << endl;
+		string query = "sh";
+		for (int i = 3; i <= 4; ++i)
+		{
+			if (names[i].find(query) != string::npos)
+			{
+				cout << "found!" << '\n';
+				cout << names[i] << " " << query << endl;
+			}
+		}*/
 	}
 	_CrtDumpMemoryLeaks();
 
