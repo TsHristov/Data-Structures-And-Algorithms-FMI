@@ -27,6 +27,12 @@ void print(string arr[], int n)
 		cout << arr[i] << " ";
 }
 
+void print(DynamicArray<string> arr, int n)
+{
+	for (int i = 0; i < n; i++)
+		cout << arr[i] << " ";
+}
+
 // Get maximum length of word  in the array of names
 int getMax(string names[], int n)
 {
@@ -111,30 +117,28 @@ void radixsort(string names[], int N)
 		countSort(names, N, step);
 }
 
-string* ENTER(string arg[])
+DynamicArray<string> ENTER(DynamicArray<string> arg)
 {
 	int min, max;
 	std::cin >> min >> max;
 	int size = (max - min) + 1;
-	string *result = new string[size];
-	int index = 0;
+	
+	DynamicArray<string> result;
 	for (int i = min; i <= max; ++i)
 	{
-		result[index++] = arg[i];
+		result.insert(arg[i]);
 	}
 	print(result, size);
 	return result;
 }
 
-/*void QUERY(string* names)
+void QUERY(DynamicArray<string> names)
 {
 	string query;
 	std::cin >> query;
 	int count = 0;
 
-	//need to know the size of names!!!
-	//size_t size = names.GetSize();
-	for (size_t i = 0; i <= size; ++i)
+	for (size_t i = 0; i <= names.GetSize(); ++i)
 	{
 		if (names[i].find(query) != string::npos)
 		{
@@ -142,7 +146,7 @@ string* ENTER(string arg[])
 		}
 	}
 	std::cout << count << endl;
-}*/
+}
 
 int main()
 {
@@ -168,11 +172,17 @@ int main()
 			std::cout << endl;
 
 			
-			
-			string *copy = new string[N];
+			DynamicArray<string> NAMES;
 			for (int i = 0; i < N; ++i)
 			{
-				copy[i] = names[i];
+				NAMES.insert(names[i]);
+			}
+			
+
+			DynamicArray<string> copy;
+			for (int i = 0; i < N; ++i)
+			{
+				copy.insert(names[i]);
 			}
 
 			for (int i = 0; i < Q; ++i)
@@ -183,15 +193,13 @@ int main()
 				string query = "QUERY";
 				if (!strcmp(str.c_str(), query.c_str()))
 				{
-					//QUERY(copy);
+					QUERY(copy);
 				}
 				else if (!strcmp(str.c_str(), enter.c_str()))
 				{
-					delete[] copy;
-					copy = ENTER(names);
+					copy = ENTER(NAMES);
 				}
 			}
-			delete[] copy;
 			delete[] names;
 		}
 	}
