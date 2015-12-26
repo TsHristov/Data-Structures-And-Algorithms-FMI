@@ -3,6 +3,7 @@
 #define CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+#include "DynamicArray.h"
 using namespace std;
 
 //Get position of the letter in the array as index of it
@@ -84,11 +85,14 @@ void countSort(string names[], int N, int step)
 
 	// Copy the output array to arr[], so that arr[] now
 	// contains sorted names according to current letter
+	DynamicArray<string> temp;
 	for (i = 0; i < N; i++)
 	{
 		if (output[i] != "")
-		names[i] = output[i];
+			//temp.insert(output[i]);
+			names[i] = output[i];
 	}
+	//names = temp;
 	std::cout << " \n Result: ";
 	print(names, N);
 	std::cout << endl << endl;
@@ -100,7 +104,6 @@ void radixsort(string names[], int N)
 {
 	// Find the maximum length of  word to know number of letters
 	int maxLength = getMax(names, N);
-
 	// Do counting sort for every letter.
 	// step - on the first step look at the last letter,on the second the letter before the last and so on...
 	int step;
@@ -108,76 +111,92 @@ void radixsort(string names[], int N)
 		countSort(names, N, step);
 }
 
-/*string* ENTER(string arg[],int min,int max)
+string* ENTER(string arg[])
 {
-	int size = (max - min) + 1;
-	string result[size];
-	for (int i = min; i <= max; ++i)
-	{
-		result[i] = arg[i];
-	}
-	delete[] result;
-	return arg;
-}*/
-
-void QUERY(string names[])
-{
-	std::cout << "ENTER";
 	int min, max;
 	std::cin >> min >> max;
+	int size = (max - min) + 1;
+	string *result = new string[size];
+	int index = 0;
+	for (int i = min; i <= max; ++i)
+	{
+		result[index++] = arg[i];
+	}
+	print(result, size);
+	return result;
+}
+
+/*void QUERY(string* names)
+{
 	string query;
-	std::cout << "QUERY";
 	std::cin >> query;
 	int count = 0;
-	for (int i = min; i <= max; ++i)
+
+	//need to know the size of names!!!
+	//size_t size = names.GetSize();
+	for (size_t i = 0; i <= size; ++i)
 	{
 		if (names[i].find(query) != string::npos)
 		{
 			++count;
-			/*cout << 1 << '\n';
-			cout << names[i] << " " << query << endl;*/
 		}
 	}
 	std::cout << count << endl;
-}
+}*/
+
 int main()
 {
 	{
-		int T,N,Q;
+		int T;
 		cout << "T=";
 		cin >> T;
-		cout << "N=";
-		cin >> N;
-		cout << "Q=";
-		cin >> Q;
-		string* names = new string[N];
-		for (int i = 0; i < N; ++i)
+		for (int i = 0; i < T; ++i)
 		{
-			std::cout << "[" << i << "]=";
-			std::cin >> names[i];
-		} 
-		radixsort(names, N);
-		print(names, N);
-		std::cout << endl;
-		QUERY(names);
-		/*string* m = ENTER(names, 0, 3);
-		std::cout << endl;
-		print(m, 4);*/
-		/*string names[] = { "ivan", "mitko", "joro", "peshe", "tobi" };
-		radixsort(names, N);
-		print(names, N);
-		cout << endl;
-		string query = "sh";
-		for (int i = 3; i <= 4; ++i)
-		{
-			if (names[i].find(query) != string::npos)
+			int N, Q;
+			cout << "N=";
+			cin >> N;
+			cout << "Q=";
+			cin >> Q;
+			string *names = new string[N];
+			for (int i = 0; i < N; ++i)
 			{
-				cout << "found!" << '\n';
-				cout << names[i] << " " << query << endl;
+				std::cout << "[" << i << "]=";
+				std::cin >> names[i];
 			}
-		}*/
+			radixsort(names, N);
+			print(names, N);
+			std::cout << endl;
+
+			
+			
+			string *copy = new string[N];
+			for (int i = 0; i < N; ++i)
+			{
+				copy[i] = names[i];
+			}
+
+			for (int i = 0; i < Q; ++i)
+			{
+				string str;
+				std::cin >> str;
+				string enter = "ENTER";
+				string query = "QUERY";
+				if (!strcmp(str.c_str(), query.c_str()))
+				{
+					//QUERY(copy);
+				}
+				else if (!strcmp(str.c_str(), enter.c_str()))
+				{
+					delete[] copy;
+					copy = ENTER(names);
+				}
+			}
+			delete[] copy;
+			delete[] names;
+		}
 	}
 	_CrtDumpMemoryLeaks();
+
 
 	return 0;
 }
