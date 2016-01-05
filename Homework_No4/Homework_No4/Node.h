@@ -4,18 +4,15 @@
 
 class Node
 {
-
 public:
 	int data;
-	//int parentIndex;
-	DynamicArray<Node> children;
+	DynamicArray<Node*> children;
 
 public:
 	Node():data(-1){}
 	Node(const int data)
 	{
 		this->data = data;
-		//this->parentIndex = parentIndex;
 	}
 	int getData() const
 	{
@@ -28,15 +25,15 @@ public:
 		else
 			return false;
 	}
-	void insertChild(Node &n)
+	void insertChild(Node *n)
 	{
 		this->children.insert(n);
 	}
 	
-	Node nextChild()
+	/*Node nextChild()
 	{
 		return this->children.getNext();
-	}
+	}*/
 
 	/*int getParentIndex() const
 	{

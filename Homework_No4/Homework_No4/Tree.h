@@ -4,41 +4,59 @@
 
 class Tree
 {
-	Node root;
+private:
+	Node *root;
+
 public:
-	Tree(){}
-	void buildTree(Node node, char* str)
+	Tree(): root(NULL){}
+	~Tree()
+	{
+		if (root)
+		{
+			delete root;
+		}
+	}
+	void buildTree(Node *& node, char* str)
 	{
 		if (*str == '\0')
 		{
 			return;
 		}
-		Node current;
+
+		Node *current = NULL;
+
 		if (*str == '(')
 		{
 			++str;
 			int data = (int)(*str) - '0';
 			
-			current.data = data;
+			std::cout << "Create node " << data << '\n';
+			current = new Node(data);
 
-			if (root.data == -1)
+			if (!root)
 			{
 				root = current;
+				buildTree(root, ++str);
 			}
-			else
-			{
-				root.children.insert(current);
-			}
+			
+			std::cout << "Insert " << current->data << " in node " << node->data << '\n';
+			
+			node->children.insert(current);
+			buildTree(current, ++str);
 		}
 		else if (*str == '{')
 		{
 			//	Here the children of the current node should be inserted.
-			buildTree(current,++str);
+			buildTree(node,++str);
 		}
 		else if (*str == '}')
 		{
 			//	Return to the main node and continue . . .
 			buildTree(root, ++str);
+		}
+		else if (*str == ' ' || *str == ')')
+		{
+			buildTree(node, ++str);
 		}
 	}
 
