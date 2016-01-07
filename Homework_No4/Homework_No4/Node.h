@@ -2,15 +2,17 @@
 #include <iostream>
 #include "DynamicArray.h"
 
+template<class T>
 class Node
 {
 public:
-	int data;
-	DynamicArray<Node*> children;
+	T data;
+	Node<T> *parent;
+	DynamicArray<Node<T>*> children;
 
 public:
-	Node():data(-1){}
-	Node(const int data)
+	Node():parent(NULL){}
+	Node(const T data)
 	{
 		this->data = data;
 	}
@@ -25,9 +27,14 @@ public:
 		else
 			return false;
 	}
-	void insertChild(Node *n)
+	void insertChild(Node<T> *n)
 	{
 		this->children.insert(n);
+	}
+
+	void setParent(Node<T> *node)
+	{
+		this->parent = node;
 	}
 	
 	/*Node nextChild()

@@ -2,13 +2,14 @@
 #include "Node.h"
 #include "DynamicArray.h"
 
+template<class T>
 class Tree
 {
 private:
-	Node *root;
+	Node<T> *root;
 
 public:
-	Tree(): root(NULL){}
+	Tree() : root(NULL){}
 	~Tree()
 	{
 		if (root)
@@ -16,43 +17,42 @@ public:
 			delete root;
 		}
 	}
-	void buildTree(Node *& node, char* str)
+	void buildTree(Node<T> * node, char* str)
 	{
 		if (*str == '\0')
 		{
 			return;
 		}
 
-		Node *current = NULL;
-
 		if (*str == '(')
 		{
 			++str;
-			int data = (int)(*str) - '0';
-			
+			T data = *str;
+
 			std::cout << "Create node " << data << '\n';
-			current = new Node(data);
+			Node<T> *current = new Node<T>(data);
 
 			if (!root)
 			{
 				root = current;
 				buildTree(root, ++str);
 			}
-			
+
 			std::cout << "Insert " << current->data << " in node " << node->data << '\n';
-			
+
 			node->children.insert(current);
+			current->setParent(node);
 			buildTree(current, ++str);
 		}
 		else if (*str == '{')
 		{
 			//	Here the children of the current node should be inserted.
-			buildTree(node,++str);
+			buildTree(node, ++str);
 		}
 		else if (*str == '}')
 		{
-			//	Return to the main node and continue . . .
-			buildTree(root, ++str);
+			//	return to the parent of the node
+			buildTree(node->parent, ++str);
 		}
 		else if (*str == ' ' || *str == ')')
 		{
