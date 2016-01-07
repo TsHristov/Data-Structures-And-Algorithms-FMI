@@ -8,6 +8,8 @@ private:
 	size_t capacity;
 	T* phead;
 
+	int z;
+
 //private:
 	//int index;
 
@@ -34,10 +36,15 @@ public:
 		}
 		return 0;
 	}*/
-	/*T getNext()
+	T getNext()
 	{
-		return phead[index++];
-	}*/
+		if (z < this->GetSize())
+		return phead[z++];
+	}
+	bool hasNext()
+	{
+		return z < this->GetSize();
+	}
 public:
 	void print() const;
 };
@@ -46,7 +53,7 @@ template<class T>
 DynamicArray<T>::DynamicArray()
 {
 	size = 0;
-	//index = 0;
+	z = 0;
 	capacity = 3;
 	phead = new T[capacity];
 }
@@ -145,5 +152,5 @@ template<class T>
 
 bool DynamicArray<T>::IsEmpty() const
 {
-	return size;
+	return !size;
 }
