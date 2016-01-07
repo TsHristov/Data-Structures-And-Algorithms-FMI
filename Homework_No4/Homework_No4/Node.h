@@ -12,6 +12,16 @@ public:
 
 public:
 	Node():parent(NULL){}
+	~Node()
+	{
+		for (int i = 0; i < children.GetSize(); ++i)
+		{
+			if (children[i])
+			{
+				delete children[i];
+			}
+		}
+	}
 	Node(const T data)
 	{
 		this->data = data;

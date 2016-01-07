@@ -11,6 +11,7 @@ int main()
 {
 	{
 		char* str = "(A {(B {}) (C {(D {}) (E {}) (F {})})})";
+		//char *str = "(7{(15 {(7 {}) (10 {})}) (3 {})})";
 		Tree<char> test;
 		test.build(str);
 	}

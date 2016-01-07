@@ -24,6 +24,11 @@ public:
 			return;
 		}
 
+		while (*str == ' ' || *str == ')')
+		{
+			++str;
+		}
+
 		if (*str == '(')
 		{
 			++str;
@@ -49,17 +54,11 @@ public:
 		}
 		else if (*str == '{')
 		{
-			//	Here the children of the current node should be inserted.
 			buildTree(node, ++str);
 		}
 		else if (*str == '}')
 		{
-			//	return to the parent of the node
 			buildTree(node->parent, ++str);
-		}
-		else if (*str == ' ' || *str == ')')
-		{
-			buildTree(node, ++str);
 		}
 	}
 
