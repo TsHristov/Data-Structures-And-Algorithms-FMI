@@ -38,11 +38,14 @@ public:
 				buildTree(root, ++str);
 			}
 
-			std::cout << "Insert " << current->data << " in node " << node->data << '\n';
+			if (node)
+			{
+				std::cout << "Insert " << current->data << " in node " << node->data << '\n';
 
-			node->children.insert(current);
-			current->setParent(node);
-			buildTree(current, ++str);
+				node->children.insert(current);
+				current->setParent(node);
+				buildTree(current, ++str);
+			}
 		}
 		else if (*str == '{')
 		{
