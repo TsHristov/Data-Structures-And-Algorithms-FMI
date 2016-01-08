@@ -5,32 +5,34 @@
 template<class T>
 class Node
 {
+
 public:
-	bool sorted;
+	bool wasSorted;
 	T data;
 	Node<T> *parent;
 	DynamicArray<Node<T>*> children;
 
 public:
-	Node() :parent(NULL),sorted(false){}
+	Node() :parent(NULL),wasSorted(false){}
 	~Node();
 	Node(const Node<T>&);
 	Node(const T);
 	
-
 public:
 	T getData() const;
 	bool isLeaf() const;
 	void insertChild(Node<T>*);
 	void setParent(Node<T>*);
-	size_t countOfChildren();
-	void printChildren();
+	size_t countOfChildren() const;
+	void printChildren() const;
 
 public:
+	//	Proxy to sort the children of the current node,
+	//	based on this how many children they have.
 	void sort();
 
 private:
-	void swapif(Node<T> *&, Node<T> *&);
+	void swap(Node<T> *&, Node<T> *&);
 	void SelectionSort();
 };
 
@@ -50,7 +52,7 @@ Node<T>::~Node()
 template<class T>
 Node<T>::Node(const Node<T>& o)
 {
-	sorted = o.sorted;
+	wasSorted = o.wasSorted;
 	data = o.data;
 	parent = o.parent;
 	children = o.children;
@@ -59,7 +61,7 @@ Node<T>::Node(const Node<T>& o)
 template<class T>
 Node<T>::Node(const T data)
 {
-	this->sorted = false;
+	this->wasSorted = false;
 	this->data = data;
 	this->parent = NULL;
 }
@@ -95,14 +97,14 @@ void Node<T>::setParent(Node<T> *node)
 
 
 template<class T>
-size_t Node<T>::countOfChildren()
+size_t Node<T>::countOfChildren() const
 {
 	return this->children.GetSize();
 }
 
 
 template<class T>
-void Node<T>::printChildren()
+void Node<T>::printChildren() const
 {
 	for (size_t i = 0; i < children.GetSize(); ++i)
 	{
@@ -112,7 +114,7 @@ void Node<T>::printChildren()
 
 
 template<class T>
-void Node<T>::swapif(Node<T> *&a, Node<T> *&b)
+void Node<T>::swap(Node<T> *&a, Node<T> *&b)
 {
 	if (b->countOfChildren() < a->countOfChildren())
 	{
@@ -126,28 +128,21 @@ void Node<T>::swapif(Node<T> *&a, Node<T> *&b)
 template<class T>
 void Node<T>::SelectionSort()
 {
-	if (this->children.GetSize() == 0)
+	if (children.GetSize() == 0)
 		return;
 
-	for (size_t i = 0; i < this->children.GetSize() - 1; i++)
+	for (size_t i = 0; i < children.GetSize() - 1; i++)
 	{
+
 		size_t min = i;
 
-		for (size_t j = i + 1; j < this->children.GetSize(); j++)
+		for (size_t j = i + 1; j < children.GetSize(); j++)
 		{
-			std::cout << "Node " << (char)children[j]->getData()
-				<< " has " << children[j]->countOfChildren() << " children" << '\n';
-
-			std::cout << "Node " << (char)children[min]->getData()
-				<< " has " << children[min]->countOfChildren() << " children" << '\n';
 			if (children[j]->countOfChildren() < children[min]->countOfChildren())
 				min = j;
 		}
 
-		std::cout << "Before:" << (char)children[i]->getData() << (char)children[min]->getData() << '\n';
-		swapif(children[i], children[min]);
-		std::cout << "After:" << (char)children[i]->getData() << (char)children[min]->getData() << '\n';
-
+		swap(children[i], children[min]);
 	}
 }
 
@@ -156,5 +151,5 @@ template<class T>
 void Node<T>::sort()
 {
 	SelectionSort();
-	this->sorted = true;
+	this->wasSorted = true;
 }

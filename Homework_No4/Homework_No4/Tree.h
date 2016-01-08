@@ -18,6 +18,15 @@ public:
 		buildTree(root, str);
 	}
 
+	//	This function first checks whether the current two nodes of the two trees
+	//	have different number of children, if so then the trees are not isomorphic.
+	//
+	//	If the nodes are leaves it goes back to the theit parent.
+	//
+	//	Next if the number of children are the same and there are
+	//	still children unchecked then first sorts them
+	//	based on how many children they have and recursively eneters each of the child with
+	//	the above steps.
 	bool Isomorphic(Node<T> *first, Node<T> *second)
 	{
 		if (first->countOfChildren() != second->countOfChildren())
@@ -30,12 +39,12 @@ public:
 		}
 		else if (first->children.hasNext() && second->children.hasNext())
 		{
-			//	If the array of children for the node has been sorted don`t sort it again.
-			if (!first->sorted)
+			//	If the children of the nodes have been sorted skip this step.
+			if (!first->wasSorted)
 			{
 				first->sort();
 			}
-			if (!second->sorted)
+			if (!second->wasSorted)
 			{
 				second->sort();
 			}
@@ -61,6 +70,7 @@ public:
 	}
 
 private:
+	//	Builds the tree recursively.
 	void buildTree(Node<T>*, char*);
 };
 
@@ -77,6 +87,7 @@ Tree<T>::~Tree()
 template<class T>
 void Tree<T>::buildTree(Node<T> * node, char* str)
 {
+	//	Bottom of the recursion.
 	if (*str == '\0')
 	{
 		return;
@@ -92,7 +103,7 @@ void Tree<T>::buildTree(Node<T> * node, char* str)
 		++str;
 		T data = *str;
 
-		std::cout << "Create node " << data << '\n';
+		//std::cout << "Create node " << data << '\n';
 		Node<T> *current = new Node<T>(data);
 
 		if (!root)
@@ -103,9 +114,9 @@ void Tree<T>::buildTree(Node<T> * node, char* str)
 
 		if (node)
 		{
-			std::cout << "Insert " << current->data << " in node " << node->data << '\n';
+			//std::cout << "Insert " << current->data << " in node " << node->data << '\n';
 
-			node->children.insert(current);
+			node->insertChild(current);
 			current->setParent(node);
 			buildTree(current, ++str);
 		}
