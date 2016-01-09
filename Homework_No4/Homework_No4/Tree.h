@@ -9,11 +9,10 @@ private:
 
 public:
 	Tree() : root(NULL){}
+	Tree(char*);
 	~Tree();
 
 public:
-	void build(char *);
-
 	static void areIsomorphic(Tree &, Tree &);
 
 private:

@@ -1,18 +1,19 @@
 #include "Tree.h"
 #include <iostream>
 
+Tree::Tree(char *str)
+{
+	root = NULL;
+	buildTree(root, str);
+}
+
+
 Tree::~Tree()
 {
 	if (root)
 	{
 		delete root;
 	}
-}
-
-
-void Tree::build(char *str)
-{
-	buildTree(root, str);
 }
 
 
@@ -45,7 +46,6 @@ void Tree::buildTree(Node * node, char* str)
 		}
 
 		Node *current = new Node(data);
-		std::cout << data << '\n';
 
 		if (!root)
 		{

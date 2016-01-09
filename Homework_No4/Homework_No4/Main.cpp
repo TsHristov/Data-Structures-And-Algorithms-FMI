@@ -1,19 +1,18 @@
 #include <iostream>
 #include <string>
 #include "Tree.h"
+#define CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-	char* str = "(5 {(9 {}) (1 {(C {}) (13 {}) (4 {})})})";
-	char* str1 = "(5 {     (A {  }) (1 { (1 {}) (1 {}) (4 {})})})";
+	std::cout << "First tree : " << argv[1] << '\n';
+	std::cout << "Second tree : " << argv[2] << '\n';
+	
+	Tree test(argv[1]);
 
-	std::cout << "Building first tree..." << '\n';
-	Tree test;
-	test.build(str);
-
-	std::cout << "Building second tree..." << '\n';
-	Tree test1;
-	test1.build(str1);
+	Tree test1(argv[2]);
 
 	Tree::areIsomorphic(test, test1);
 
