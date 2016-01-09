@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
 #include "Tree.h"
-#define CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 
 int main(int argc, char *argv[])
 {
