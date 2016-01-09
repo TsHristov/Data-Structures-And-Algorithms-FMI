@@ -1,5 +1,6 @@
-#include<iostream>
 #pragma once
+#include <iostream>
+
 template<class T>
 class DynamicArray
 {
@@ -7,11 +8,7 @@ private:
 	size_t size;
 	size_t capacity;
 	T* phead;
-
-	int z;
-
-//private:
-	//int index;
+	size_t idx;
 
 public:
 	DynamicArray();
@@ -27,24 +24,18 @@ public:
 	void free();
 	size_t GetSize() const;
 	bool IsEmpty() const;
-	/*int find(T data) const
-	{
-		for (int i = 0; i < this->GetSize(); ++i)
-		{
-			if (phead[i] == data)
-				return i;
-		}
-		return 0;
-	}*/
+
+public:
 	T getNext()
 	{
-		if (z < this->GetSize())
-		return phead[z++];
+		if (idx < this->GetSize())
+		return phead[idx++];
 	}
 	bool hasNext()
 	{
-		return z < this->GetSize();
+		return idx < this->GetSize();
 	}
+
 public:
 	void print() const;
 };
@@ -53,7 +44,7 @@ template<class T>
 DynamicArray<T>::DynamicArray()
 {
 	size = 0;
-	z = 0;
+	idx = 0;
 	capacity = 3;
 	phead = new T[capacity];
 }
